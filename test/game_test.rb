@@ -1,7 +1,6 @@
-require 'minitest/spec'
-require 'minitest/autorun'
+require_relative 'test_helper'
 
-require_relative '../lib/game'
+require 'game'
 
 describe Game do
   
@@ -12,45 +11,53 @@ describe Game do
 	  end
 
 	  it "returns TIE if the same move is used" do
-	  	Game.play!(:scissors, :scissors).must_equal("TIE")
+	  	Game.play!(:scissors, :scissors)[:winner].must_equal("TIE")
 	  end
 
-		# =================
-		# Scissors cut paper
-		# Paper covers rock
-		# Rock crushes lizard
-		# Lizard poisons Spock
-		# Spock smashes (or melts) scissors
-		# Scissors decapitate lizard
-		# Lizard eats paper
-		# Paper disproves Spock
-		# Spock vaporizes rock
-		# Rock breaks scissors
-	  it "returns the winning move" do
-	  	Game.play!(:scissors, :paper ).must_equal(:scissors)
-	  	Game.play!(:scissors, :lizard).must_equal(:scissors)
-	  	Game.play!(:paper, :scissors ).must_equal(:scissors)
-	  	Game.play!(:lizard, :scissors).must_equal(:scissors)
+		# # =================
+		# # Scissors cut paper
+		# # Paper covers rock
+		# # Rock crushes lizard
+		# # Lizard poisons Spock
+		# # Spock smashes (or melts) scissors
+		# # Scissors decapitate lizard
+		# # Lizard eats paper
+		# # Paper disproves Spock
+		# # Spock vaporizes rock
+		# # Rock breaks scissors
+	  it "returns the winning player" do
+	  	Game.play!(:scissors, :paper )[:winner].must_equal("player1")
+	  	Game.play!(:scissors, :lizard)[:winner].must_equal("player1")
+	  	Game.play!(:paper, :scissors )[:winner].must_equal("player2")
+	  	Game.play!(:lizard, :scissors)[:winner].must_equal("player2")
 
-	  	Game.play!(:paper, :rock ).must_equal(:paper)
-	  	Game.play!(:paper, :spock).must_equal(:paper)	
-	  	Game.play!(:rock, :paper ).must_equal(:paper)
-	  	Game.play!(:spock, :paper).must_equal(:paper)	
+	  	Game.play!(:paper, :rock )[:winner].must_equal("player1")
+	  	Game.play!(:paper, :spock)[:winner].must_equal("player1")	
+	  	Game.play!(:rock, :paper )[:winner].must_equal("player2")
+	  	Game.play!(:spock, :paper)[:winner].must_equal("player2")
 
-	  	Game.play!(:rock, :lizard  ).must_equal(:rock)	
-	  	Game.play!(:rock, :scissors).must_equal(:rock)	
-	  	Game.play!(:lizard,   :rock).must_equal(:rock)	
-	  	Game.play!(:scissors, :rock).must_equal(:rock)	
+	  	Game.play!(:rock, :lizard  )[:winner].must_equal("player1")
+	  	Game.play!(:rock, :scissors)[:winner].must_equal("player1")
+	  	Game.play!(:lizard,   :rock)[:winner].must_equal("player2")
+	  	Game.play!(:scissors, :rock)[:winner].must_equal("player2")
 
-	  	Game.play!(:lizard, :spock).must_equal(:lizard)	
-	  	Game.play!(:lizard, :paper).must_equal(:lizard)	
-	  	Game.play!(:spock, :lizard).must_equal(:lizard)	
-	  	Game.play!(:paper, :lizard).must_equal(:lizard)		  	
+	  	Game.play!(:lizard, :spock)[:winner].must_equal("player1")
+	  	Game.play!(:lizard, :paper)[:winner].must_equal("player1")
+	  	Game.play!(:spock, :lizard)[:winner].must_equal("player2")
+	  	Game.play!(:paper, :lizard)[:winner].must_equal("player2")	  	
 
-	  	Game.play!(:spock, :scissors).must_equal(:spock)	
-	  	Game.play!(:spock, :rock    ).must_equal(:spock)	
-	  	Game.play!(:scissors, :spock).must_equal(:spock)	
-	  	Game.play!(:rock, :spock    ).must_equal(:spock)		  	
+	  	Game.play!(:spock, :scissors)[:winner].must_equal("player1")
+	  	Game.play!(:spock, :rock    )[:winner].must_equal("player1")
+	  	Game.play!(:scissors, :spock)[:winner].must_equal("player2")
+	  	Game.play!(:rock, :spock    )[:winner].must_equal("player2")
+	  end
+
+	  it "detects an invalid move by player1" do
+	  	assert_raises(RuntimeError) { Game.play!(:cheat, :spock) }
+	  end
+
+	  it "detects an invalid move by player2" do
+	  	assert_raises(RuntimeError) { Game.play!(:rock, :cheat) }
 	  end
 
 	end

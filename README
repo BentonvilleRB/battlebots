@@ -1,0 +1,33 @@
+Bentonville.rb Battlebots!
+
+
+To play:
+
+for an overview (and inspiration)
+read http://www.reddit.com/r/dailyprogrammer_ideas/comments/1ecasd/intermediate_rock_paper_scissors_lizard_spock_ai/
+
+clone this repo
+
+read through lib/game.rb for how the game is played
+
+read through lib/stubbon_bot.rb, lib/chaos_bot.rb, and lib/learning_bot.rb for some examples
+
+read through lib/play.rb for how the bots and the game work together.
+
+
+# Summary of Rules
+# =================
+# Scissors cut paper
+# Paper covers rock
+# Rock crushes lizard
+# Lizard poisons Spock
+# Spock smashes (or melts) scissors
+# Scissors decapitate lizard
+# Lizard eats paper
+# Paper disproves Spock
+# Spock vaporizes rock
+# Rock breaks scissors
+
+
+Please have your bots either in their own repository, or on a USB stick ready for action!
+
